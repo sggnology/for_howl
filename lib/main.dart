@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:for_howl/service/shared_preference/SharedPreferenceService.dart';
 import 'package:for_howl/view/playlist/index.dart';
 import 'package:for_howl/view/profile/index.dart';
 
@@ -9,10 +10,12 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Bottom Navigation',
+      title: 'ForHowl',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -58,29 +61,32 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // TODO: 추후에 메뉴 적용되면 PageView 적용 예정, 현재는 사용되고 있지 않습니다.
       body: PageView(
         controller: _pageController,
         onPageChanged: _onPageChanged,
         children: const <Widget>[
           PlaylistPage(),
-          ProfilePage(),
+          // TODO: 추후에 메뉴가 추가되면 적용 예정
+          // ProfilePage(),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
-      ),
+      // TODO: 추후에 메뉴가 추가되면 적용 예정
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: const <BottomNavigationBarItem>[
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.home),
+      //       label: 'Home',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.person),
+      //       label: 'Profile',
+      //     ),
+      //   ],
+      //   currentIndex: _selectedIndex,
+      //   selectedItemColor: Colors.amber[800],
+      //   onTap: _onItemTapped,
+      // ),
     );
   }
 }
