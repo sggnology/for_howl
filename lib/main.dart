@@ -63,15 +63,17 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       // TODO: 추후에 메뉴 적용되면 PageView 적용 예정, 현재는 사용되고 있지 않습니다.
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: _onPageChanged,
-        children: const <Widget>[
-          PlaylistPage(),
-          // TODO: 추후에 메뉴가 추가되면 적용 예정
-          // ProfilePage(),
-        ],
-      ),
+      body: SafeArea(
+        child: PageView(
+          controller: _pageController,
+          onPageChanged: _onPageChanged,
+          children: const <Widget>[
+            PlaylistPage(),
+            // TODO: 추후에 메뉴가 추가되면 적용 예정
+            // ProfilePage(),
+          ],
+        ),
+      )
       // TODO: 추후에 메뉴가 추가되면 적용 예정
       // bottomNavigationBar: BottomNavigationBar(
       //   items: const <BottomNavigationBarItem>[
