@@ -36,6 +36,13 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   final PageController _pageController = PageController();
 
+  void _onPageChanged(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  /// BottomNavigationBarItem 클릭 시 페이지 이동
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -45,12 +52,6 @@ class _MyHomePageState extends State<MyHomePage> {
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
-  }
-
-  void _onPageChanged(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 
   @override
