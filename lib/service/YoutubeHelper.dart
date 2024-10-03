@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
+import 'package:for_howl/service/audio_handler/model/YoutubeAudioMetaInfo.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 class YoutubeHelper {
 
-  static Future<String> extractAudioURLFromYoutubeURL(String youtubeURL) async {
+  static Future<YoutubeAudioMetaInfo> extractAudioMetaInfoFromURL(String youtubeURL) async {
 
     // YoutubeExplode 인스턴스를 생성합니다.
     var yt = YoutubeExplode();
@@ -19,9 +21,19 @@ class YoutubeHelper {
       var manifest = await yt.videos.streamsClient.getManifest(videoID);
       var audioStreamInfo = manifest.audioOnly.withHighestBitrate();
 
-      print("Audio Stream URL 추출 성공: ${audioStreamInfo.url}");
+      var result = YoutubeAudioMetaInfo(
+        url: audioStreamInfo.url.toString(),
+        title: video.title,
+        artist: video.author,
+        duration: video.duration ?? Duration.zero,
+        thumbnailUrl: video.thumbnails.highResUrl,
+      );
 
-      return audioStreamInfo.url.toString();
+      if (kDebugMode) {
+        print("Audio Stream URL 추출 성공: $result");
+      }
+
+      return result;
     }
     on ArgumentError catch(e) {
       print('Invalid URL: $e');
@@ -35,6 +47,6 @@ class YoutubeHelper {
       yt.close();
     }
 
-    return "";
+    throw Exception("Audio Stream URL 추출 실패");
   }
 }

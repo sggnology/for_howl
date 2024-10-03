@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:for_howl/service/audio_handler/MyAudioHandler.dart';
 
 import '../audio_player_screen/index.dart';
 
 class PlaylistPage extends StatelessWidget {
-  const PlaylistPage({super.key});
+  const PlaylistPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +21,13 @@ class PlaylistPage extends StatelessWidget {
             child: AudioPlayerScreen(),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          MyAudioHandler().setAudioSource("https://www.youtube.com/watch?v=6RQ-bBdASvk");
+          // Add your onPressed code here!
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
