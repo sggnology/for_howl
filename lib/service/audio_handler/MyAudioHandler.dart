@@ -38,18 +38,23 @@ class MyAudioHandler extends BaseAudioHandler {
     YoutubeAudioMetaInfo youtubeAudioMetaInfo = await YoutubeHelper.extractAudioMetaInfoFromURL(url);
 
     // 오디오 스트림을 설정합니다.
-    await _instance._audioPlayer.setUrl(youtubeAudioMetaInfo.url);
+    Duration? audioDuration = await _instance._audioPlayer.setUrl(youtubeAudioMetaInfo.url);
 
     final currentMediaItem = mediaItem.valueOrNull;
 
     // MediaItem 중복 확인
     // - 중복되는 값에 대해 UI 업데이트를 방지하기 위함
     if (currentMediaItem == null || currentMediaItem.id != url) {
+
+      Map<String, dynamic> map = <String, dynamic>{};
+      map.putIfAbsent("audioDuration", () => audioDuration?.inSeconds ?? Duration.zero.inSeconds);
+
       mediaItem.add(MediaItem(
         id: youtubeAudioMetaInfo.url,
         title: youtubeAudioMetaInfo.title,
         artist: youtubeAudioMetaInfo.artist,
         duration: _audioPlayer.duration,
+        extras: map
       ));
     }
   }
