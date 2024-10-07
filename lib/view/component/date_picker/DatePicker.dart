@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:for_howl/service/shared_preference/SharedPreferenceKey.dart';
+import 'package:for_howl/service/shared_preference/SharedPreferenceKey.dart';
+import 'package:for_howl/service/shared_preference/SharedPreferenceKey.dart';
 import 'package:for_howl/service/shared_preference/SharedPreferenceService.dart';
 
 class DatePicker extends StatefulWidget {
@@ -9,10 +12,29 @@ class DatePicker extends StatefulWidget {
 }
 
 class _DatePickerState extends State<DatePicker> {
-  String SCHEDULED_DATE_LIST_KEY = 'ScheduledDateList';
 
   List<String> dateTextList = ['월', '화', '수', '목', '금', '토', '일'];
   List<int> dateList = List.generate(7, (index) => 0);
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  Future<void> init() async {
+    List<String>? dateListString =
+        SharedPreferencesService().getStringList(SharedPreferenceKey.SCHEDULED_START_TIME_KEY);
+
+    if (dateListString != null) {
+      dateList = dateListString.map((e) => int.parse(e)).toList();
+    } else {
+      SharedPreferencesService().setStringList(
+        SharedPreferenceKey.SCHEDULED_START_TIME_KEY,
+        dateList.map((e) => e.toString()).toList(),
+      );
+    }
+  }
 
   void setDateInfo(int index) {
     if (dateList[index] == 0) {
@@ -26,29 +48,9 @@ class _DatePickerState extends State<DatePicker> {
     }
 
     SharedPreferencesService().setStringList(
-      SCHEDULED_DATE_LIST_KEY,
+      SharedPreferenceKey.SCHEDULED_START_TIME_KEY,
       dateList.map((e) => e.toString()).toList(),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    init();
-  }
-
-  Future<void> init() async {
-    List<String>? dateListString =
-        SharedPreferencesService().getStringList(SCHEDULED_DATE_LIST_KEY);
-
-    if (dateListString != null) {
-      dateList = dateListString.map((e) => int.parse(e)).toList();
-    } else {
-      SharedPreferencesService().setStringList(
-        SCHEDULED_DATE_LIST_KEY,
-        dateList.map((e) => e.toString()).toList(),
-      );
-    }
   }
 
   @override
