@@ -20,6 +20,15 @@ class MyAudioHandler extends BaseAudioHandler {
     _audioPlayer.playbackEventStream.listen((event) {
       playbackState.add(_transformEvent(event));
     });
+
+    _audioPlayer.processingStateStream.listen((state) {
+      if(state == ProcessingState.loading){
+        pause();
+      }
+      else if(state == ProcessingState.ready){
+        play();
+      }
+    });
   }
 
   static PlaybackState _transformEvent(PlaybackEvent event) {
@@ -60,6 +69,7 @@ class MyAudioHandler extends BaseAudioHandler {
         throw Exception("Invalid state: $state");
     }
   }
+
   //endregion
 
   Future<void> init() async {
@@ -78,9 +88,8 @@ class MyAudioHandler extends BaseAudioHandler {
         await YoutubeHelper.extractAudioMetaInfoFromURL(url);
 
     // 오디오 스트림을 설정합니다.
-    Duration? audioDuration = await _instance
-        ._audioPlayer
-        .setUrl(youtubeAudioMetaInfo.url);
+    Duration? audioDuration =
+        await _instance._audioPlayer.setUrl(youtubeAudioMetaInfo.url);
 
     final currentMediaItem = mediaItem.valueOrNull;
 
@@ -91,12 +100,15 @@ class MyAudioHandler extends BaseAudioHandler {
       map.putIfAbsent("audioDuration",
           () => audioDuration?.inSeconds ?? Duration.zero.inSeconds);
 
-      mediaItem.add(MediaItem(
+      mediaItem.add(
+        MediaItem(
           id: youtubeAudioMetaInfo.url,
           title: youtubeAudioMetaInfo.title,
           artist: youtubeAudioMetaInfo.artist,
           duration: _audioPlayer.duration,
-          extras: map));
+          extras: map,
+        ),
+      );
     }
   }
 
