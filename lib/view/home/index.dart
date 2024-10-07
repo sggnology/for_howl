@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: PageView(
             controller: _pageController,
             onPageChanged: _onPageChanged,
-            children: const <Widget>[
+            children: <Widget>[
               PlaylistPage(),
               // TODO: 추후에 메뉴가 추가되면 적용 예정
               // ProfilePage(),

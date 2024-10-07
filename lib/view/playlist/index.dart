@@ -3,9 +3,12 @@ import 'package:for_howl/service/audio_handler/MyAudioHandler.dart';
 import 'package:for_howl/view/component/audio_player_screen/AudioPlayerScreen.dart';
 
 class PlaylistPage extends StatelessWidget {
-  const PlaylistPage({
+
+  PlaylistPage({
     super.key,
   });
+
+  final _audioHandler = MyAudioHandler();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,7 @@ class PlaylistPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          MyAudioHandler().setAudioSource("https://www.youtube.com/watch?v=6RQ-bBdASvk");
+          _audioHandler.setAudioSource("https://www.youtube.com/watch?v=6RQ-bBdASvk");
           // Add your onPressed code here!
         },
         child: const Icon(Icons.add),
