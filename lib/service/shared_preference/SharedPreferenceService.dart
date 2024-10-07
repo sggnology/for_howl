@@ -30,6 +30,16 @@ class SharedPreferencesService {
     return _preferences?.getString(key);
   }
 
+  // String List 데이터 저장
+  Future<void> setStringList(String key, List<String> value) async {
+    await _preferences?.setStringList(key, value);
+  }
+
+  // String List 데이터 로드
+  List<String>? getStringList(String key) {
+    return _preferences?.getStringList(key);
+  }
+
   // Int 데이터 저장
   Future<void> setInt(String key, int value) async {
     await _preferences?.setInt(key, value);
