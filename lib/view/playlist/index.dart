@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:for_howl/service/audio_handler/MyAudioHandler.dart';
-import 'package:for_howl/view/component/audio_player_screen/index.dart';
+import 'package:for_howl/view/component/audio_player_screen/AudioPlayerScreen.dart';
 
 class PlaylistPage extends StatelessWidget {
   const PlaylistPage({
