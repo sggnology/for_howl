@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:for_howl/service/audio_handler/MyAudioHandler.dart';
 import 'package:for_howl/view/component/audio_player_screen/AudioPlayerScreen.dart';
-import 'package:for_howl/view/component/date_picker/DatePicker.dart';
-import 'package:for_howl/view/component/time_range_picker/TimeRangePicker.dart';
+import 'package:for_howl/view/component/setting/date_picker/DatePicker.dart';
+import 'package:for_howl/view/component/setting/time_range_picker/TimeRangePicker.dart';
 
 class PlaylistPage extends StatelessWidget {
   PlaylistPage({
