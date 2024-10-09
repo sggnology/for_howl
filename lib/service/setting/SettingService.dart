@@ -12,7 +12,7 @@ class SettingService {
   SettingService._internal();
   // </editor-fold>
 
-  final SettingModel _settingModel = SettingModel();
+  final SettingModel _settingModel = SettingModel(isUseScheduleSetting: false);
 
   SettingModel get settingModel => _settingModel;
 
