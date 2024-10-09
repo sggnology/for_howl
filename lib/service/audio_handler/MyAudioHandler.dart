@@ -5,6 +5,8 @@ import 'package:just_audio/just_audio.dart';
 import 'model/YoutubeAudioMetaInfo.dart';
 
 class MyAudioHandler extends BaseAudioHandler {
+
+  //region Singleton Composition
   static MyAudioHandler _instance = MyAudioHandler._internal();
 
   factory MyAudioHandler() {
@@ -12,6 +14,7 @@ class MyAudioHandler extends BaseAudioHandler {
   }
 
   late AudioPlayer _audioPlayer;
+  //endregion
 
   //region Constructor & Helper of Constructor
   MyAudioHandler._internal() {
